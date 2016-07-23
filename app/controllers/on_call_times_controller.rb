@@ -8,7 +8,7 @@ class OnCallTimesController < ApplicationController
   end
 
   def new
-    @call_times = OnCallTime.new
+#    @call_times = OnCallTime.new
   end 
 
   def create 
