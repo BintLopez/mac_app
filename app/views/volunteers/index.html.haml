@@ -1,10 +1,30 @@
-%h1 Volunteers List
-.container
-  .row{:style => "margin-bottom: 20px; text-align:right"}
-  = link_to new_volunteer_path, class: "btn btn-primary" do
-    New Volunteer Account
-%br/
+%h1 Potential Volunteers
 .row
+%table.table.table-striped.table-bordered.table-condensed
+  %thead
+  %tr
+    %th{:colspan => "1"} First Name
+    %th{:colspan => "1"} Last Name
+    %th{:colspan => "1"} Email
+    %th{:colspan => "1"} Interested In
+    %th Actions
+  %tbody
+    - unless @potential_volunteers.empty?
+      - @potential_volunteers.each do |volunteer|
+        %tr
+          %td= volunteer.first_name
+          %td= volunteer.last_name
+          %td= volunteer.email
+          %td= volunteer.interested_in
+          %td
+            = link_to(edit_volunteer_path(volunteer), class: "btn btn-small") do
+              Edit
+            = link_to(volunteer_path(volunteer), class: "btn btn-info") do
+              View
+            = link_to(volunteer, class: "btn btn-small btn-danger", method: :delete)  do
+              Delete
+.row
+%h1 Volunteers
 %table.table.table-striped.table-bordered.table-condensed
   %thead
   %tr

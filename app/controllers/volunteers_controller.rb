@@ -1,5 +1,5 @@
 class VolunteersController < ApplicationController
-  before_action :authenticate_user!, :load_volunteer, :load_volunteer_data
+  before_action :authenticate_user!, :load_volunteer, :load_volunteer_data, :load_potential_volunteers
 
   def index
     if current_user && current_user.organizer
@@ -10,6 +10,7 @@ class VolunteersController < ApplicationController
   end
 
   def new
+    redirect_to new_volunteer_lead_path
   end
 
   def create
@@ -95,5 +96,9 @@ class VolunteersController < ApplicationController
 
   def load_volunteer_data
     @volunteer_data = UserPresenter.data_for(@volunteer.user).call if @volunteer
+  end
+
+  def load_potential_volunteers
+    @potential_volunteers ||= VolunteerLead.where(volunteer_id: nil)
   end
 end
