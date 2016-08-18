@@ -62,6 +62,10 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.3.5)
       execjs
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.11)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -80,6 +84,8 @@ GEM
     cancan (1.6.10)
     chronic (0.10.2)
     coderay (1.1.1)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -89,6 +95,8 @@ GEM
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.1)
     debug_inspector (0.0.2)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -97,6 +105,8 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    enumerable-lazy (0.0.1)
+    equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -133,6 +143,16 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
+    grape (0.17.0)
+      activesupport
+      builder
+      hashie (>= 2.1.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      mustermann19 (~> 0.4.3)
+      rack (>= 1.3.0)
+      rack-accept
+      virtus (>= 1.0.0)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -144,6 +164,9 @@ GEM
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    hashie (3.4.4)
+    hashie-forbidden_attributes (0.1.1)
+      hashie (>= 3.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -152,6 +175,7 @@ GEM
     httpclient (2.8.2.1)
     hurley (0.2)
     i18n (0.7.0)
+    ice_nine (0.11.2)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
       has_scope (~> 0.6.0.rc)
@@ -189,7 +213,10 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     multipart-post (2.0.0)
+    mustermann19 (0.4.4)
+      enumerable-lazy
     nested_form (0.3.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
@@ -206,6 +233,8 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
       rack (~> 1.1)
@@ -326,6 +355,11 @@ GEM
     uber (0.0.15)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    virtus (1.0.5)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.6)
       rack (>= 1.0)
     web-console (2.3.0)
@@ -349,7 +383,9 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   faker
   google-api-client
+  grape
   haml-rails (~> 0.9.0)
+  hashie-forbidden_attributes
   jbuilder (~> 2.0)
   jquery-rails
   materialize-sass

@@ -10,6 +10,10 @@ gem 'papertrail'
 gem 'cancan'
 gem 'autoprefixer-rails'
 
+# API
+gem 'grape'
+gem 'hashie-forbidden_attributes'
+
 gem 'google-api-client'
 
 # Use postgres as the database for Active Record
