@@ -16,3 +16,7 @@
 !/log/.keep
 /tmp
 /.byebug_history
+
+# Ignore env
+.env
+google_integration.json
