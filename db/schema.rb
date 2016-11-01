@@ -11,20 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160924200940) do
+ActiveRecord::Schema.define(version: 20161101052829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "accommodations", force: :cascade do |t|
+    t.boolean  "private"
     t.string   "bedding"
-    t.string   "privacy"
-    t.integer  "guest_capacity"
-    t.string   "pet"
-    t.integer  "num_roommates"
-    t.integer  "volunteer_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.boolean  "inactive"
+    t.integer  "host_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "addressables", force: :cascade do |t|
+    t.integer  "address_id"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -33,52 +39,141 @@ ActiveRecord::Schema.define(version: 20160924200940) do
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
-    t.integer  "user_id"
-    t.integer  "clinic_id"
+    t.string   "neighborhood"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
 
-  create_table "business_hours", force: :cascade do |t|
-    t.time     "open_time"
-    t.time     "close_time"
-    t.integer  "day_of_week"
+  create_table "appointments", force: :cascade do |t|
     t.integer  "clinic_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "clinics", force: :cascade do |t|
-    t.string   "title"
-    t.string   "transit_accessible"
-    t.string   "abortion_types"
-    t.string   "site_url"
-    t.string   "map_url"
-    t.integer  "business_hours_id"
+    t.datetime "appt_time"
+    t.integer  "support_request_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
 
-  create_table "on_call_times", force: :cascade do |t|
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.integer  "user_id"
+  create_table "clinics", force: :cascade do |t|
+    t.string   "title"
+    t.string   "nearest_transit"
+    t.string   "procedure_types"
+    t.string   "site_url"
+    t.string   "map_url"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "companions", force: :cascade do |t|
+    t.integer  "guest_id"
+    t.integer  "person_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "contactables", force: :cascade do |t|
+    t.integer  "contact_id"
+    t.integer  "contactable_id"
+    t.string   "contactable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.string   "address"
+    t.integer  "contact_id"
+    t.boolean  "do_not_email"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.text     "notes"
+    t.integer  "person_id"
+    t.integer  "support_request_id"
+    t.boolean  "allergies"
+    t.boolean  "male_okay"
+    t.boolean  "pets_okay"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "hosts", force: :cascade do |t|
+    t.integer  "volunteer_id"
+    t.integer  "guest_capacity"
+    t.boolean  "inactive"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "organizers", force: :cascade do |t|
     t.string   "position"
     t.boolean  "board_member"
-    t.integer  "user_id",      null: false
+    t.integer  "person_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "phone_number"
+    t.string   "gender"
+    t.date     "date_of_birth"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "pets", force: :cascade do |t|
+    t.string   "type"
+    t.string   "size"
+    t.string   "behavior"
+    t.integer  "host_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "phone_numbers", force: :cascade do |t|
+    t.string   "number"
+    t.boolean  "do_not_call"
+    t.string   "type"
+    t.integer  "contact_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "reimbursement_requests", force: :cascade do |t|
+    t.integer  "support_request_id"
+    t.integer  "assigned_to"
+    t.integer  "requested_by"
+    t.string   "status"
+    t.string   "receipt_upload"
+    t.integer  "amount_cents"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string   "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "services_rendereds", force: :cascade do |t|
+    t.integer  "service_id"
+    t.integer  "support_request_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "support_requests", force: :cascade do |t|
+    t.boolean  "completed"
+    t.text     "notes"
+    t.date     "date_of_contact"
+    t.date     "date_of_assistance"
+    t.string   "referred_from"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string   "role"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
@@ -99,34 +194,14 @@ ActiveRecord::Schema.define(version: 20160924200940) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "vehicles", force: :cascade do |t|
-    t.string   "make"
-    t.string   "model"
-    t.string   "color"
-    t.string   "license_plate_number"
-    t.integer  "volunteer_id",         null: false
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  create_table "volunteer_leads", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.text     "interested_in", default: [],              array: true
-    t.string   "phone_number"
-    t.integer  "volunteer_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
   create_table "volunteers", force: :cascade do |t|
-    t.string   "gender"
-    t.string   "capacity"
-    t.boolean  "on_call"
-    t.integer  "user_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.date     "training_date"
+    t.boolean  "can_drive"
+    t.date     "docs_received_date"
+    t.text     "notes"
+    t.boolean  "inactive"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end

@@ -1,10 +1,11 @@
 class CreateVolunteers < ActiveRecord::Migration
   def change
     create_table :volunteers do |t|
-      t.string :gender
-      t.string :capacity
-      t.boolean :on_call
-      t.integer :user_id, null: false
+      t.date :training_date
+      t.boolean :can_drive
+      t.date :docs_received_date
+      t.text :notes
+      t.boolean :inactive
 
       t.timestamps null: false
     end

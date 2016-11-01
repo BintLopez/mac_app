@@ -3,7 +3,7 @@ class CreateOrganizers < ActiveRecord::Migration
     create_table :organizers do |t|
       t.string :position
       t.boolean :board_member
-      t.integer :user_id, null: false
+      t.integer :person_id
 
       t.timestamps null: false
     end

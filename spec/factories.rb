@@ -1,12 +1,90 @@
 FactoryGirl.define do
-
+  factory :service do
+    type ""
+  end
+  factory :services_rendered do
+    service_id 1
+    support_request_id 1
+  end
+  factory :appointment do
+    clinic_id 1
+    appt_time "2016-11-01 00:26:55"
+    support_request_id 1
+  end
+  factory :support_request do
+    completed false
+    notes "MyText"
+    date_of_contact "2016-11-01"
+    date_of_assistance "2016-11-01"
+    referred_from "MyString"
+  end
+  factory :companion do
+    guest_id 1
+    person_id 1
+  end
+  factory :guest do
+    notes "MyText"
+    person_id 1
+    support_request_id 1
+    allergies false
+    male_okay false
+    pets_okay false
+  end
+  factory :reimbursement_request do
+    support_request_id 1
+    assigned_to 1
+    requested_by 1
+    status "MyString"
+    receipt_upload "MyString"
+    amount_cents 1
+  end
+  factory :pet do
+    type ""
+    size "MyString"
+    behavior "MyString"
+    host_id 1
+  end
   factory :accommodation do
-    bedding "queen sized bed in guest bedroom"
-    privacy "locked door"
-    guest_capacity 1
-    pet "none"
-    num_roommates 1
+    private false
+    bedding "MyString"
+    inactive false
+    host_id 1
+  end
+  factory :host do
     volunteer_id 1
+    guest_capacity 1
+    inactive false
+  end
+  factory :contactable do
+    contact_id 1
+    contactable_id 1
+    contactable_type "MyString"
+  end
+  factory :addressable do
+    address_id 1
+    addressable_id 1
+    addressable_type "MyString"
+  end
+  factory :volunteer do
+    training_date "2016-10-31"
+    can_drive false
+    docs_received_date "2016-10-31"
+    notes "MyText"
+    inactive false
+  end
+  factory :phone_number do
+    number "MyString"
+    do_not_call false
+    type ""
+    contact_id 1
+  end
+  factory :email do
+    address "MyString"
+    emailable_id 1
+    bad_email false
+  end
+  factory :person do
+    
   end
 
   factory :address do 
@@ -21,12 +99,6 @@ FactoryGirl.define do
     open_time DateTime.parse("2016-04-01 00:38:41")
     close_time DateTime.parse("2016-04-01 00:38:41")
     day_of_week 1
-  end
-
-  factory :volunteer do 
-    gender "female"
-    on_call false
-    user_id 1
   end
 
   factory :clinic do 

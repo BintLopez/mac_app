@@ -1,12 +1,10 @@
 class CreateAccommodations < ActiveRecord::Migration
   def change
     create_table :accommodations do |t|
+      t.boolean :private
       t.string :bedding
-      t.string :privacy
-      t.integer :guest_capacity
-      t.string :pet
-      t.integer :num_roommates
-      t.integer :volunteer_id
+      t.boolean :inactive
+      t.integer :host_id
 
       t.timestamps null: false
     end
