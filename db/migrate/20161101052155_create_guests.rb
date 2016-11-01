@@ -3,7 +3,6 @@ class CreateGuests < ActiveRecord::Migration
     create_table :guests do |t|
       t.text :notes
       t.integer :person_id
-      t.integer :support_request_id
       t.boolean :allergies
       t.boolean :male_okay
       t.boolean :pets_okay

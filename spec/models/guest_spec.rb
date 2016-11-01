@@ -1,5 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Guest, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to belong_to(:support_request) }
+  it { is_expected.to belong(:person) }
+  it { is_expected.to have_many(:companions) }
 end

@@ -7,6 +7,7 @@ class CreateReimbursementRequests < ActiveRecord::Migration
       t.string :status
       t.string :receipt_upload
       t.integer :amount_cents
+      t.string :reason
 
       t.timestamps null: false
     end

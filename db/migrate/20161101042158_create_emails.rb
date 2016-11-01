@@ -3,7 +3,7 @@ class CreateEmails < ActiveRecord::Migration
     create_table :emails do |t|
       t.string :address
       t.integer :contact_id
-      t.boolean :do_not_email
+      t.boolean :inactive
 
       t.timestamps null: false
     end

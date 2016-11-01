@@ -7,10 +7,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :name
 
-  has_one :volunteer
-  has_one :organizer
-  has_many :addresses
-  has_many :on_call_times
+  has_one :person
 
   def self.find_for_google_oauth2(auth)
     user = User.find_or_create_by(email: auth.info['email']) do |user|

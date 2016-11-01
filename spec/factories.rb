@@ -1,4 +1,13 @@
 FactoryGirl.define do
+  factory :volunteer_assignment do
+    support_request_id 1
+    volunteer_id 1
+    status "MyString"
+    notes "MyText"
+  end
+  factory :contact do
+    do_not_contact false
+  end
   factory :service do
     type ""
   end
