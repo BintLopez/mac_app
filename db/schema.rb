@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 20161101061227) do
   create_table "appointments", force: :cascade do |t|
     t.integer  "clinic_id"
     t.datetime "appt_time"
-    t.integer  "support_request_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.integer  "guest_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "clinics", force: :cascade do |t|

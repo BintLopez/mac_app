@@ -3,7 +3,7 @@ class CreateAppointments < ActiveRecord::Migration
     create_table :appointments do |t|
       t.integer :clinic_id
       t.datetime :appt_time
-      t.integer :support_request_id
+      t.integer :guest_id
 
       t.timestamps null: false
     end

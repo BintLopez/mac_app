@@ -6,9 +6,12 @@ class CreateVolunteers < ActiveRecord::Migration
       t.date :docs_received_date
       t.text :notes
       t.boolean :inactive
+      t.string :position
       t.integer :person_id
 
       t.timestamps null: false
     end
+
+    add_index :volunteers, :person_id
   end
 end

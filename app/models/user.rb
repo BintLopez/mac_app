@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
 
   has_one :person
   has_many :addresses, as: :addressable
+  has_many :reimbursement_requests
+
+  delegate :address, to: :person
 
   def self.find_for_google_oauth2(auth)
     user = User.find_or_create_by(email: auth.info['email']) do |user|
@@ -22,18 +25,6 @@ class User < ActiveRecord::Base
     user.refresh_token = auth.credentials.refresh_token
     user.save!
     user
-  end
-
-  def create_volunteer_model
-    if volunteer.nil?
-      self.volunteer = Volunteer.new(user: self)
-      save!
-    end
-  end
-
-  def address
-    return unless addresses.present?
-    addresses.last
   end
 
   def full_name
