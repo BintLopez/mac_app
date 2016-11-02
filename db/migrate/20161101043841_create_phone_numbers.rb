@@ -4,7 +4,7 @@ class CreatePhoneNumbers < ActiveRecord::Migration
       t.string :number
       t.boolean :inactive
       t.string :type
-      t.integer :contact_id
+      t.belongs_to :contact, index: true
 
       t.timestamps null: false
     end

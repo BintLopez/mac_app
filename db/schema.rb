@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "updated_at",       null: false
   end
 
+  add_index "contacts", ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id", using: :btree
+
   create_table "emails", force: :cascade do |t|
     t.string   "address"
     t.integer  "contact_id"
@@ -81,6 +83,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "emails", ["contact_id"], name: "index_emails_on_contact_id", using: :btree
 
   create_table "guests", force: :cascade do |t|
     t.text     "notes"
@@ -103,14 +107,6 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "organizers", force: :cascade do |t|
-    t.string   "position"
-    t.boolean  "board_member"
-    t.integer  "person_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -120,6 +116,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
+
+  add_index "people", ["user_id"], name: "index_people_on_user_id", using: :btree
 
   create_table "pets", force: :cascade do |t|
     t.string   "type"
@@ -138,6 +136,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "phone_numbers", ["contact_id"], name: "index_phone_numbers_on_contact_id", using: :btree
 
   create_table "reimbursement_requests", force: :cascade do |t|
     t.integer  "support_request_id"
@@ -211,9 +211,12 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.date     "docs_received_date"
     t.text     "notes"
     t.boolean  "inactive"
+    t.string   "position"
     t.integer  "person_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  add_index "volunteers", ["person_id"], name: "index_volunteers_on_person_id", using: :btree
 
 end

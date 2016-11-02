@@ -7,11 +7,9 @@ class CreateVolunteers < ActiveRecord::Migration
       t.text :notes
       t.boolean :inactive
       t.string :position
-      t.integer :person_id
+      t.belongs_to :person, index: true
 
       t.timestamps null: false
     end
-
-    add_index :volunteers, :person_id
   end
 end
