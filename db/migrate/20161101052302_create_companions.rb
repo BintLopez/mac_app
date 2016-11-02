@@ -1,7 +1,7 @@
 class CreateCompanions < ActiveRecord::Migration
   def change
     create_table :companions do |t|
-      t.integer :guest_id
+      t.belongs_to :guest, index: true
       t.string :age
       t.string :gender
 

@@ -1,7 +1,7 @@
 class CreateHosts < ActiveRecord::Migration
   def change
     create_table :hosts do |t|
-      t.integer :volunteer_id
+      t.belongs_to :volunteer, index: true
       t.integer :guest_capacity
       t.boolean :inactive
 

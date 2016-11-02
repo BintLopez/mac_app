@@ -2,11 +2,11 @@ class CreateGuests < ActiveRecord::Migration
   def change
     create_table :guests do |t|
       t.text :notes
-      t.integer :person_id
+      t.belongs_to :person, index: true
       t.boolean :allergies
       t.boolean :male_okay
       t.boolean :pets_okay
-      t.integer :support_request_id, index: true
+      t.belongs_to :support_request, index: true
 
       t.timestamps null: false
     end

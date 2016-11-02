@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "accommodations", ["host_id"], name: "index_accommodations_on_host_id", using: :btree
+
   create_table "addresses", force: :cascade do |t|
     t.string   "street_address_1"
     t.string   "street_address_2"
@@ -48,6 +50,9 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "appointments", ["clinic_id"], name: "index_appointments_on_clinic_id", using: :btree
+  add_index "appointments", ["guest_id"], name: "index_appointments_on_guest_id", using: :btree
+
   create_table "clinics", force: :cascade do |t|
     t.string   "title"
     t.string   "nearest_transit"
@@ -65,6 +70,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "companions", ["guest_id"], name: "index_companions_on_guest_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
     t.integer  "contactable_id"
@@ -97,6 +104,7 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "updated_at",         null: false
   end
 
+  add_index "guests", ["person_id"], name: "index_guests_on_person_id", using: :btree
   add_index "guests", ["support_request_id"], name: "index_guests_on_support_request_id", using: :btree
 
   create_table "hosts", force: :cascade do |t|
@@ -106,6 +114,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  add_index "hosts", ["volunteer_id"], name: "index_hosts_on_volunteer_id", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "first_name"
@@ -127,6 +137,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "pets", ["host_id"], name: "index_pets_on_host_id", using: :btree
 
   create_table "phone_numbers", force: :cascade do |t|
     t.string   "number"
@@ -164,6 +176,9 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "updated_at",         null: false
   end
 
+  add_index "services_rendereds", ["service_id"], name: "index_services_rendereds_on_service_id", using: :btree
+  add_index "services_rendereds", ["support_request_id"], name: "index_services_rendereds_on_support_request_id", using: :btree
+
   create_table "support_requests", force: :cascade do |t|
     t.boolean  "completed"
     t.text     "notes"
@@ -174,6 +189,8 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  add_index "support_requests", ["guest_id"], name: "index_support_requests_on_guest_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "role"
@@ -204,6 +221,9 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  add_index "volunteer_assignments", ["support_request_id"], name: "index_volunteer_assignments_on_support_request_id", using: :btree
+  add_index "volunteer_assignments", ["volunteer_id"], name: "index_volunteer_assignments_on_volunteer_id", using: :btree
 
   create_table "volunteers", force: :cascade do |t|
     t.date     "training_date"

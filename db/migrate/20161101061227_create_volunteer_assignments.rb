@@ -1,8 +1,8 @@
 class CreateVolunteerAssignments < ActiveRecord::Migration
   def change
     create_table :volunteer_assignments do |t|
-      t.integer :support_request_id
-      t.integer :volunteer_id
+      t.belongs_to :support_request, index: true
+      t.belongs_to :volunteer, index: true
       t.string :status
       t.text :notes
 

@@ -4,7 +4,7 @@ class CreatePets < ActiveRecord::Migration
       t.string :type
       t.string :size
       t.string :behavior
-      t.integer :host_id
+      t.belongs_to :host, index: true
 
       t.timestamps null: false
     end

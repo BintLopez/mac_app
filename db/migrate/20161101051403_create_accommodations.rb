@@ -4,7 +4,7 @@ class CreateAccommodations < ActiveRecord::Migration
       t.boolean :private
       t.string :bedding
       t.boolean :inactive
-      t.integer :host_id
+      t.belongs_to :host, index: true
 
       t.timestamps null: false
     end
