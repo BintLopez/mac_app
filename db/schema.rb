@@ -25,14 +25,6 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "addressables", force: :cascade do |t|
-    t.integer  "address_id"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
   create_table "addresses", force: :cascade do |t|
     t.string   "street_address_1"
     t.string   "street_address_2"
@@ -40,9 +32,13 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.string   "state"
     t.string   "zip_code"
     t.string   "neighborhood"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end
+
+  add_index "addresses", ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id", using: :btree
 
   create_table "appointments", force: :cascade do |t|
     t.integer  "clinic_id"
@@ -92,9 +88,12 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.boolean  "allergies"
     t.boolean  "male_okay"
     t.boolean  "pets_okay"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "support_request_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
+
+  add_index "guests", ["support_request_id"], name: "index_guests_on_support_request_id", using: :btree
 
   create_table "hosts", force: :cascade do |t|
     t.integer  "volunteer_id"
@@ -212,6 +211,7 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.date     "docs_received_date"
     t.text     "notes"
     t.boolean  "inactive"
+    t.integer  "person_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end

@@ -6,6 +6,7 @@ class CreateGuests < ActiveRecord::Migration
       t.boolean :allergies
       t.boolean :male_okay
       t.boolean :pets_okay
+      t.integer :support_request_id, index: true
 
       t.timestamps null: false
     end

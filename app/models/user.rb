@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   attr_accessor :name
 
   has_one :person
+  has_many :addresses, as: :addressable
 
   def self.find_for_google_oauth2(auth)
     user = User.find_or_create_by(email: auth.info['email']) do |user|

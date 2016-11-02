@@ -3,7 +3,7 @@ require 'rails_helper'
 describe Organizer do
   subject { build(:organizer) }
 
-  it { should belong_to(:user) }
+  it { should belong_to(:person) }
 
   it "has a valid factory" do
     subject.valid?

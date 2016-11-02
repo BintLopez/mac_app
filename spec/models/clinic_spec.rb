@@ -4,7 +4,7 @@ describe Clinic do
   subject { build(:clinic) }
 
   it { should have_many(:addresses) }
-  it { should have_many(:business_hours) }
+  it { should have_many(:contacts) }
 
   it "has a valid factory" do
     subject.valid?

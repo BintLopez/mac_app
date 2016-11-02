@@ -104,16 +104,10 @@ FactoryGirl.define do
     zip_code Faker::Address.zip
   end
 
-  factory :business_hour do 
-    open_time DateTime.parse("2016-04-01 00:38:41")
-    close_time DateTime.parse("2016-04-01 00:38:41")
-    day_of_week 1
-  end
-
   factory :clinic do 
-    title Faker::Name.title  
-    transit_accessible Faker::Lorem.word 
-    abortion_types Faker::Lorem.word
+    title Faker::Name.title 
+    nearest_transit Faker::Lorem.word 
+    procedure_types Faker::Lorem.word
     site_url Faker::Internet.url 
     map_url Faker::Internet.url 
   end
@@ -121,7 +115,7 @@ FactoryGirl.define do
   factory :organizer do 
     position Faker::Lorem.word
     board_member false
-    user_id 1
+    person_id 1
   end
 
   factory :user do 
