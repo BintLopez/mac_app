@@ -15,10 +15,15 @@ class VolunteerPresenter < UserPresenter
 
   def volunteer_data
     {
-      gender: volunteer.gender,
-      role: volunteer.capacity,
+      gender: person.gender,
+      position: volunteer.position,
       on_call: volunteer.on_call,
+      age: person.age,
     }
+  end
+
+  def person
+    user.person
   end
 
 end

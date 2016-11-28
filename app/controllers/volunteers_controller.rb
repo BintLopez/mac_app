@@ -1,8 +1,8 @@
 class VolunteersController < ApplicationController
-  before_action :authenticate_user!, :load_volunteer, :load_volunteer_data
+  # before_action :authenticate_user!, :load_volunteer, :load_volunteer_data
 
   def index
-    if current_user && current_user.organizer
+    if current_user #&& current_user.organizer
   	 @volunteers = Volunteer.all
     else
       redirect_to main_app.root_path

@@ -5,7 +5,7 @@ class CreateVolunteers < ActiveRecord::Migration
       t.boolean :can_drive
       t.date :docs_received_date
       t.text :notes
-      t.boolean :inactive
+      t.boolean :active
       t.string :position
       t.belongs_to :person, index: true
 

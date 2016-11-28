@@ -29,6 +29,7 @@ describe VolunteerPresenter do
       first_name: "Bob",
       last_name: "Blahblah",
       email: "bob@lawblog.com",
+      age: 28,
       full_name: "Bob Blahblah",
       address_line_1: "123 Sesame Street",
       address_line_2: "Banana Stand",
@@ -41,6 +42,7 @@ describe VolunteerPresenter do
   
   xit "produces expected data" do
     data = VolunteerPresenter.new(volunteer).present
+    binding.pry
     expect(data).to eq(expected_data)
   end
 

@@ -15,14 +15,8 @@ class UserPresenter
   }
 
   def self.data_for(user)
-    if user.organizer
-      OrganizerPresenter.new(user)
-    elsif user.volunteer
-      VolunteerPresenter.new(user)
-    else
-      raise ArgumentError.new("Unexpected user type for #{user}") unless user.is_a? User
-      new(user)
-    end
+    raise ArgumentError.new("Unexpected user type for #{user}") unless user.is_a? User
+    new(user)
   end
 
   def initialize user
@@ -39,11 +33,11 @@ class UserPresenter
 
   def user_data
     {
-      first_name: user.first_name,
-      last_name: user.last_name,
+      first_name: person.try(:first_name),
+      last_name: person.try(:last_name),
       email: user.email,
-      full_name: user.full_name,
-      phone_number: user.phone_number,
+      full_name: person.try(:full_name),
+      phone_number: person.try(:phone_number),
     }
   end
 
@@ -57,6 +51,26 @@ class UserPresenter
       zip: address.zip_code,
       full_address: address.full_address,
     }
+  end
+
+  def organizer_data
+    {
+      board_member: user.role == :board_member,
+      position: volunteer.try(:position),
+      role: user.role
+    }
+  end
+
+  def address
+    person.try(:address)
+  end
+
+  def person
+    user.person
+  end
+
+  def volunteer
+    person.try(:volunteer)
   end
 
   private

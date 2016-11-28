@@ -1,0 +1,44 @@
+= form_for(@potential_volunteer) do |potential_volunteer|
+  .form-group.row
+    .col-sm-4
+      = potential_volunteer.label :first_name
+    .col-sm-8
+      .col-sm-8
+        = potential_volunteer.text_field :first_name
+  .form-group.row
+    .col-sm-4
+      = potential_volunteer.label :last_name
+    .col-sm-8
+      .col-sm-8
+        = potential_volunteer.text_field :last_name
+  .form-group.row
+    .col-sm-4
+      = potential_volunteer.label :email
+    .col-sm-8
+      .col-sm-8
+        = potential_volunteer.text_field :email
+  .form-group.row
+    .col-sm-4
+      = potential_volunteer.label :phone_number
+    .col-sm-8
+      .col-sm-8
+        = potential_volunteer.text_field :phone_number
+  .form-group.row
+    .col-sm-4
+      = potential_volunteer.label "How do you want to volunteer"
+    .col-sm-8
+      .col-sm-8
+        =check_box_tag "drive",  1
+        =potential_volunteer.label "drive"
+      .col-sm-8
+        =check_box_tag "host",  1
+        =potential_volunteer.label "host"
+      .col-sm-8
+        =check_box_tag "other",  1
+        =potential_volunteer.label "other"
+  .row
+    .col-sm-4
+      .btn
+        = potential_volunteer.submit "Update"
+      .btn
+        = link_to "Back", url_for(:back)

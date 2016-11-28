@@ -13,10 +13,12 @@ class User < ActiveRecord::Base
 
   delegate :address, to: :person
 
+  ROLES = [
+    BOARD_MEMBER = 'board_member'
+  ]
+
   def self.find_for_google_oauth2(auth)
     user = User.find_or_create_by(email: auth.info['email']) do |user|
-      user.first_name = auth.info['first_name']
-      user.last_name = auth.info['last_name']
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.save!
@@ -27,8 +29,12 @@ class User < ActiveRecord::Base
     user
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
+  def board_member?
+    has_mac_gmail?
+  end
+
+  def has_mac_gmail?
+    email.ends_with('@midwestaccesscoalition.org')
   end
 
 end

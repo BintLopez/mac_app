@@ -112,11 +112,6 @@ FactoryGirl.define do
     map_url Faker::Internet.url 
   end
 
-  factory :organizer do 
-    position Faker::Lorem.word
-    board_member false
-    person_id 1
-  end
 
   factory :user do 
     first_name Faker::Name.first_name
@@ -127,11 +122,4 @@ FactoryGirl.define do
     password "password"
   end
 
-  factory :vehicle do 
-    make Faker::Lorem.word
-    model Faker::Lorem.word
-    color Faker::Lorem.word
-    license_plate_number Faker::Lorem.word
-    volunteer_id 1
-  end
 end

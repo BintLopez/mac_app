@@ -230,7 +230,7 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.boolean  "can_drive"
     t.date     "docs_received_date"
     t.text     "notes"
-    t.boolean  "inactive"
+    t.boolean  "active"
     t.string   "position"
     t.integer  "person_id"
     t.datetime "created_at",         null: false
