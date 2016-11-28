@@ -37,6 +37,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  ENV["GOOGLE_CLIENT_ID"] = 'fake'
+  ENV["GOOGLE_CLIENT_SECRET"] = 'auth'
+
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
