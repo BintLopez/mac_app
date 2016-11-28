@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   before_action :load_user, :load_user_data
-  before_action :set_dates_for_calendar
-  before_action :set_viewable_on_call_times
+  # before_action :set_dates_for_calendar
+  # before_action :set_viewable_on_call_times
   before_action :load_board_members
 
   def index

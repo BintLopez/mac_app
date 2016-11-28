@@ -1,15 +1,7 @@
 require 'rails_helper'
 
-describe Volunteer do
-  subject { build(:volunteer) }
-
-  it { should belong_to(:user) }
-  it { should have_one(:vehicle) }
-  it { should have_one(:accommodation) }
-
-  it "has a valid factory" do
-    subject.valid?
-    expect(subject.errors.messages).to eq({})
-  end
-
+RSpec.describe Volunteer, type: :model do
+  it { is_expected.to belong_to(:person) }
+  it { is_expected.to have_one(:host) }
+  it { is_expected.to have_many(:volunteer_assignments) }
 end

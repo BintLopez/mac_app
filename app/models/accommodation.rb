@@ -1,3 +1,3 @@
 class Accommodation < ActiveRecord::Base
-  belongs_to :volunteer
+  belongs_to :host
 end

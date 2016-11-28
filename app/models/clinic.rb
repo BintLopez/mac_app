@@ -1,4 +1,4 @@
 class Clinic < ActiveRecord::Base
-  has_many :addresses
-  has_many :business_hours
+  has_many :addresses, as: :addressable
+  has_many :contacts, as: :contactable
 end

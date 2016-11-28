@@ -7,15 +7,18 @@ class User < ActiveRecord::Base
 
   attr_accessor :name
 
-  has_one :volunteer
-  has_one :organizer
-  has_many :addresses
-  has_many :on_call_times
+  has_one :person
+  has_many :addresses, as: :addressable
+  has_many :reimbursement_requests
+
+  delegate :address, to: :person
+
+  ROLES = [
+    BOARD_MEMBER = 'board_member'
+  ]
 
   def self.find_for_google_oauth2(auth)
     user = User.find_or_create_by(email: auth.info['email']) do |user|
-      user.first_name = auth.info['first_name']
-      user.last_name = auth.info['last_name']
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.save!
@@ -26,20 +29,12 @@ class User < ActiveRecord::Base
     user
   end
 
-  def create_volunteer_model
-    if volunteer.nil?
-      self.volunteer = Volunteer.new(user: self)
-      save!
-    end
+  def board_member?
+    has_mac_gmail?
   end
 
-  def address
-    return unless addresses.present?
-    addresses.last
-  end
-
-  def full_name
-    "#{first_name} #{last_name}"
+  def has_mac_gmail?
+    email.ends_with('@midwestaccesscoalition.org')
   end
 
 end

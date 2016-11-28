@@ -10,7 +10,7 @@ class BoardPresenter
   end
 
   def call
-    return nil unless user && user.organizer
+    return nil unless user
     board_data
   end
 
@@ -21,6 +21,6 @@ class BoardPresenter
   end
 
   def board_members
-    @board_members ||= Organizer.where(board_member: true)
+    @board_members ||= User.where(role: User::BOARD_MEMBER)
   end
 end
