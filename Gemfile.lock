@@ -371,6 +371,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   faker
   google-api-client
+  googleauth
   haml-rails (~> 0.9.0)
   jbuilder (~> 2.0)
   jquery-rails

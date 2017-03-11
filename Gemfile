@@ -46,6 +46,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor', group: :production
 
 gem 'google-api-client'
+gem 'googleauth'
+
+# Consider deleting?
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-google-oauth2'
 
