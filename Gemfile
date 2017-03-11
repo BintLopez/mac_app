@@ -10,6 +10,8 @@ gem 'papertrail'
 gem 'cancan'
 gem 'autoprefixer-rails'
 
+gem 'awesome_print'
+
 # Use postgres as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
