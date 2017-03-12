@@ -21,6 +21,8 @@
 
 /.env
 /mac-creds.json
+/nope.json
+/tmp.txt
 
 # Ignore ruby mine stuff
 *.idea
