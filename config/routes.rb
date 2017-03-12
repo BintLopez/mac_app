@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :users, only: [:edit, :show, :update]
   resources :volunteer_leads
   resources :volunteer_resources, only: [:index, :show]
+  get 'volunteer_resources/:id/download(.:format)' => 'volunteer_resources#download', defaults: {format: :pdf}
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

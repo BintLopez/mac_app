@@ -7,10 +7,19 @@ class VolunteerResourcesController < ApplicationController
     @files = service_object.volunteer_resource_files
   end
 
-  def show
+  def download
     file_data = service_object.get_file_data(params[:id])
     file_name = service_object.class.volunteer_resource_files[params[:id]]
-    send_data(file_data.force_encoding('BINARY'), filename: "#{file_name}.pdf", type: 'application/pdf', disposition: 'attachment')
+
+    respond_to do |format|
+      format.pdf do
+        send_data(file_data.force_encoding('BINARY'), filename: "#{file_name}.pdf", type: 'application/pdf', disposition: 'inline')
+      end
+    end
+  end
+
+  def show
+    @id = params[:id]
   end
 
   def service_object
