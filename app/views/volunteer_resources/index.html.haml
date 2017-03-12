@@ -1,4 +1,4 @@
 %ul
-	- @files.each do |file|
+	- @files.each do |name, id|
 		%li
-			%a{href: url_for(controller: 'volunteer_resources', action: 'show', id: "#{file.id}")}= "#{file.name}"
+			%a{href: url_for(controller: 'volunteer_resources', action: 'show', id: "#{id}")}= "#{name}"
