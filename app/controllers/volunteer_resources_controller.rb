@@ -4,12 +4,12 @@ class VolunteerResourcesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @files = service_object.volunteer_resource_files
+    @files = service_object.volunteer_resource_files_by_name
   end
 
   def download
     file_data = service_object.get_file_data(params[:id])
-    file_name = service_object.class.volunteer_resource_files[params[:id]]
+    file_name = service_object.volunteer_resource_files[params[:id]]
 
     respond_to do |format|
       format.pdf do
@@ -19,7 +19,10 @@ class VolunteerResourcesController < ApplicationController
   end
 
   def show
-    @id = params[:id]
+    @file = {
+      id: params[:id],
+      name: service_object.volunteer_resource_files[params[:id]]
+    }
   end
 
   def service_object

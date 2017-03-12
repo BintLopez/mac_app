@@ -1,5 +1,5 @@
-%object{data: url_for(controller: 'volunteer_resources', action: 'download', id: @id), type: "application/pdf", width: "100%", height: "100%"}
+%object{data: url_for(controller: 'volunteer_resources', action: 'download', id: @file[:id], file_name: @file[:name]), type: "application/pdf", width: "100%", height: "100%"}
 	%p
-		Hey there! It looks like your browser does not support PDFs. Please download the PDF to view it: <a href="#{url_for(controller: 'volunteer_resources', action: 'download', id: @id)}">Download PDF</a>.
+		Hey there! It looks like your browser does not support PDFs. Please download the PDF to view it: <a href="#{url_for(controller: 'volunteer_resources', action: 'download', id: @file[:id], file_name: @file[:name])}">Download PDF</a>.
 	%p
 		You may also want to try using Chrome as your browser. ;)

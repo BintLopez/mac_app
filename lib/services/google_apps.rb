@@ -13,29 +13,26 @@ module Services
       @client = drive.authorization = Google::Auth.get_application_default(SCOPES)
     end
 
-    def self.volunteer_resource_files
-      @@volunteer_resource_files ||= nil
+    def volunteer_resource_files
+      @@volunteer_resource_files ||= files_in_folder(ENV['VOLUNTEER_RESOURCES_FOLDER']).each_with_object({}) do |file, volunteer_resource_files|
+        volunteer_resource_files[file.id] = file.name
+      end
+    end
+
+    def volunteer_resource_files_by_name
+      @@volunteer_resource_files_by_name ||= volunteer_resource_files.invert.sort_by{|key, _| key}
     end
 
     def get_file_data(file_id)
       drive.export_file(file_id, 'application/pdf')
     end
 
-    def volunteer_resource_files
-      fetch_folder(ENV['VOLUNTEER_RESOURCES_FOLDER']).files.tap do |files|
-        @@volunteer_resource_files ||= files.reduce({}) do |acc, file|
-          acc[file.id] ||= file.name
-          acc
-        end
-      end
-    end
-
-    def fetch_folder(folder_id)
+    def files_in_folder(folder_id)
       authorize!
       drive.list_files(
         fields: 'files(id, name, parents)', 
         q: "'#{folder_id}' in parents"
-      )
+      ).files
     end
 
     def authorize!
