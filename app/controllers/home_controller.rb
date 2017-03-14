@@ -6,7 +6,7 @@ class HomeController < ApplicationController
 
   def index
     if current_user
-      redirect_to home_portal_path
+      redirect_to dashboards_board_path
     else
       redirect_to new_user_session_path
     end

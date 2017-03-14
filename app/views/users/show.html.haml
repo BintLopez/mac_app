@@ -17,7 +17,7 @@
         %td
           Last Name
         %td= @user_data[:last_name]
-      = render template: "users/_organizer_details" if current_user.organizer
+      / = render template: "users/_organizer_details" if current_user.organizer
       %tr
         %td
           Phone Number

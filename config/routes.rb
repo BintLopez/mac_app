@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'volunteers' => redirect('volunteers/index')
   get 'volunteers/index'
 
+  get 'dashboards/board' => 'dashboards#board'
+
   get 'home/portal'
 
   get 'home/index'

@@ -1,0 +1,25 @@
+#exTab1.container
+	%ul.nav.nav-tabs
+		%li.active
+			%a{href: "#profile", data: {toggle: "tab"}}
+				Profile
+		%li
+			%a{href: "#org-info", data: {toggle: "tab"}}
+				Org Info
+		%li
+			%a{href: "#board-contact", data: {toggle: "tab"}}
+				Board Contact
+		%li
+			%a{href: "#calendar", data: {toggle: "tab"}}
+				Calendar
+	
+
+	.tab-content.clearfix
+		.tab-pane.active#profile
+			= render template: 'users/show'
+		.tab-pane#org-info
+			/ = render 'org_info'
+		.tab-pane#board-contact
+			/ = render 'board_members'
+		.tab-pane#calendar
+			= render 'calendar'
