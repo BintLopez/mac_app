@@ -34,4 +34,4 @@ bundle exec rake db:schema:load RAILS_ENV=test
 `rspec` or `rake spec`
 
 ## Deploy to Heroku
-[http://midwestaccesscoalition.herokuapp.com/](http://midwestaccesscoalition.herokuapp.com/)
+[http://midwestaccess.herokuapp.com/](http://midwestaccess.herokuapp.com/)
