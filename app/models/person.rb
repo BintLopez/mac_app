@@ -9,7 +9,7 @@ class Person < ActiveRecord::Base
   end
 
   def phone_number
-    contacts.current_phone_number
+    contacts.try(:current_phone_number)
   end
 
   def email
@@ -17,7 +17,7 @@ class Person < ActiveRecord::Base
   end
 
   def address
-    addresses.active_current
+    addresses.last
   end
 
   def full_name

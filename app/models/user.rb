@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
   has_many :addresses, as: :addressable
   has_many :reimbursement_requests
 
-  delegate :address, to: :person
+  def address
+    person.try(:address)
+  end
 
   ROLES = [
     BOARD_MEMBER = 'board_member'

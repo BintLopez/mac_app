@@ -9,34 +9,47 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update_attributes(
-      params.require(:user)
-            .permit(:first_name,
-                    :last_name,
-                    :email,
-                    :phone_number))
-    
-    @address = current_user.address
-    update_or_create_address
+    current_user.update_attributes(user_params)
 
-    redirect_to home_portal_path
+    person = update_or_create_person
+    update_or_create_address_for(person)
+
+    redirect_to dashboards_board_path
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(:email)
+  end
 
   def address_params
     params.require(:user).require(:address).permit(:street_address_1, :street_address_2, :city, :state, :zip_code)
   end
 
-  def address_present?
-    params["user"]["address"].values.any? {|v| !v.blank? }
+  def person_params
+    params.require(:user).require(:person).permit(:first_name, :last_name)
   end
 
-  def update_or_create_address
-    if @address && address_present?
-      @address.update_attributes(address_params)
-    elsif address_present?
-      @address = Address.create(address_params)
+  def params_present_for?(assoc)
+    params["user"]["#{assoc}"].values.any? {|v| !v.blank? }
+  end
+
+  def update_or_create_address_for(person)
+    return unless person && params_present_for?('address')
+    if (address = current_user.address)
+      address.update_attributes(address_params)
+    else
+      @person.addresses.create(address_params)
+    end
+  end
+
+  def update_or_create_person
+    return current_user.person unless params_present_for?('person')
+    if (person = current_user.person) &&
+      person.tap { |p| p.update_attributes!(person_params) }
+    else
+      current_user.person.create(person_params)
     end
   end
 

@@ -21,7 +21,6 @@
 
 /.env
 /mac-creds.json
-/nope.json
 /client-secret.json
 /tmp.txt
 

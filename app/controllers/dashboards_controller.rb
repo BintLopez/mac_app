@@ -15,7 +15,7 @@ class DashboardsController < ApplicationController
   end
 
   def load_user
-    @user = current_user
+    @user = current_user.reload
   end
 
   def load_user_data

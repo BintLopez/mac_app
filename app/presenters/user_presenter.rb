@@ -24,10 +24,6 @@ class UserPresenter
   end
 
   def call
-    user_data
-  end
-
-  def base_data
     user_data.merge!(address_data)
   end
 
