@@ -49,12 +49,12 @@ class UsersController < ApplicationController
     if (person = current_user.person) &&
       person.tap { |p| p.update_attributes!(person_params) }
     else
-      current_user.person.create(person_params)
+      Person.create(person_params.merge(user: current_user))
     end
   end
 
   def load_user
-    @user = current_user
+    @user = current_user.reload
   end
 
   def load_user_data
