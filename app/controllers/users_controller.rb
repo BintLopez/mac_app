@@ -40,13 +40,13 @@ class UsersController < ApplicationController
     if (address = current_user.address)
       address.update_attributes(address_params)
     else
-      @person.addresses.create(address_params)
+      person.addresses.create(address_params)
     end
   end
 
   def update_or_create_person
     return current_user.person unless params_present_for?('person')
-    if (person = current_user.person) &&
+    if (person = current_user.person)
       person.tap { |p| p.update_attributes!(person_params) }
     else
       Person.create(person_params.merge(user: current_user))
