@@ -73,25 +73,16 @@ ActiveRecord::Schema.define(version: 20161101061227) do
 
   add_index "companions", ["guest_id"], name: "index_companions_on_guest_id", using: :btree
 
-  create_table "contacts", force: :cascade do |t|
-    t.integer  "contactable_id"
-    t.string   "contactable_type"
-    t.boolean  "do_not_contact"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
-
-  add_index "contacts", ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id", using: :btree
-
   create_table "emails", force: :cascade do |t|
+    t.integer  "emailable_id"
+    t.string   "emailable_type"
     t.string   "address"
-    t.integer  "contact_id"
     t.boolean  "inactive"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
-  add_index "emails", ["contact_id"], name: "index_emails_on_contact_id", using: :btree
+  add_index "emails", ["emailable_type", "emailable_id"], name: "index_emails_on_emailable_type_and_emailable_id", using: :btree
 
   create_table "guests", force: :cascade do |t|
     t.text     "notes"
@@ -141,15 +132,16 @@ ActiveRecord::Schema.define(version: 20161101061227) do
   add_index "pets", ["host_id"], name: "index_pets_on_host_id", using: :btree
 
   create_table "phone_numbers", force: :cascade do |t|
+    t.integer  "callable_id"
+    t.string   "callable_type"
     t.string   "number"
     t.boolean  "inactive"
     t.string   "type"
-    t.integer  "contact_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "phone_numbers", ["contact_id"], name: "index_phone_numbers_on_contact_id", using: :btree
+  add_index "phone_numbers", ["callable_type", "callable_id"], name: "index_phone_numbers_on_callable_type_and_callable_id", using: :btree
 
   create_table "reimbursement_requests", force: :cascade do |t|
     t.integer  "support_request_id"
@@ -194,6 +186,7 @@ ActiveRecord::Schema.define(version: 20161101061227) do
 
   create_table "users", force: :cascade do |t|
     t.string   "role"
+    t.string   "do_not_contact"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false

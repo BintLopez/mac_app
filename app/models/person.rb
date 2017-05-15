@@ -1,7 +1,8 @@
 class Person < ActiveRecord::Base
   belongs_to :user
   has_many :addresses, as: :addressable
-  has_many :contacts, as: :contactable
+  has_many :phone_numbers, as: :callable
+  has_many :emails, as: :emailable
 
   def age
     days = (Date.current - date_of_birth).floor
