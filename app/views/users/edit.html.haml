@@ -8,19 +8,19 @@
           = person_form.label :first_name
         .col-sm-8
           .col-sm-8
-            = person_form.text_field :first_name, class: "form-control col-sm-8", placeholder: 'dunno'
+            = person_form.text_field :first_name, class: "form-control col-sm-8", placeholder: @user_data[:first_name]
       .form-group.row
         .col-sm-4
           = person_form.label :last_name
         .col-sm-8
           .col-sm-8
-            = person_form.text_field :last_name, class: "form-control col-sm-8"
+            = person_form.text_field :last_name, class: "form-control col-sm-8", placeholder: @user_data[:last_name]
     .form-group.row
       .col-sm-4
         = user_form.label :email
       .col-sm-8
         .col-sm-8
-          = user_form.text_field :email, class: "form-control col-sm-8"
+          = user_form.text_field :email, class: "form-control col-sm-8", placeholder: @user_data[:email]
     = user_form.fields_for :phone_number do |phone_form|
       .form-group.row
         .col-sm-4

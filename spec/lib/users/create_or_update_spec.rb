@@ -45,6 +45,7 @@ describe Users::CreateOrUpdate do
   
   let!(:user) do
     User.create!(
+      role: 'admin',
       email: user_email,
       password: 'password'
     )
