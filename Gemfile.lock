@@ -17,6 +17,14 @@ GIT
       sass-rails
       sprockets (< 4.1)
 
+GIT
+  remote: git://github.com/sudosu/rails_admin_pundit.git
+  revision: 2b793c1d83cdfe2385e1e23254ee2dde4503009b
+  specs:
+    rails_admin_pundit (0.0.1)
+      pundit (>= 0.2.3)
+      rails_admin (>= 0.6.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -79,7 +87,6 @@ GEM
       thor (~> 0.19)
     builder (3.2.2)
     byebug (9.0.6)
-    cancan (1.6.10)
     chronic (0.10.2)
     coderay (1.1.1)
     coffee-rails (4.1.1)
@@ -231,6 +238,8 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     public_suffix (2.0.5)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -372,7 +381,6 @@ DEPENDENCIES
   better_errors
   bootstrap-sass (~> 3.3.6)
   byebug
-  cancan
   coffee-rails (~> 4.1.0)
   devise
   dotenv-rails
@@ -389,9 +397,11 @@ DEPENDENCIES
   papertrail
   pg
   pry
+  pundit
   rails (= 4.2.6)
   rails_12factor
   rails_admin
+  rails_admin_pundit!
   rspec-core (~> 3.4.3)
   rspec-rails (~> 3.4)
   sass-rails (~> 5.0)

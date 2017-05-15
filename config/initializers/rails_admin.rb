@@ -1,8 +1,8 @@
 RailsAdmin.config do |config|
 
-  config.authorize_with do
-    redirect_to main_app.root_path unless !!current_user.organizer
-  end
+  config.parent_controller = '::ApplicationController'
+  config.authorize_with :pundit
+  config.current_user_method(&:current_user)
 
   ### Popular gems integration
 
