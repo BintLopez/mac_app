@@ -36,6 +36,8 @@ class ApplicationPolicy
 
   def rails_admin?(action)
     case action
+    when :destroy
+      user.admin?
     when :dashboard
       user.admin? || user.board_member?
     when :index
@@ -43,17 +45,15 @@ class ApplicationPolicy
     when :show
       user.admin? || user.board_member?
     when :new
-      user.admin?
+      user.admin? || user.board_member?
     when :edit
       user.admin? || user.board_member?
-    when :destroy
-      user.admin?
     when :export
-      user.admin?
+      user.admin? || user.board_member?
     when :history
-      user.admin?
+      user.admin? || user.board_member?
     when :show_in_app
-      user.admin?
+      user.admin? || user.board_member?
     else
       raise ::Pundit::NotDefinedError, "unable to find policy #{action} for #{record}."
     end
