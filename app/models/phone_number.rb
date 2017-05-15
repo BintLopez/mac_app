@@ -1,3 +1,3 @@
 class PhoneNumber < ActiveRecord::Base
-  belongs_to :contact
+  belongs_to :callable, polymorphic: true
 end

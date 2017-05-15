@@ -12,10 +12,10 @@ end
 def board_positions
   {
     leah: "Executive Director",
-    abby: "Director of Operations",
+    marie: "Director of Operations",
     hannah: "Director of Communications",
-    katie: "Director of Finance",
-    veronica: "Director of Outreach",
+    veronica: "Director of Finance",
+    abby: "Director of Outreach",
     nicole: "Director of Technology"
   }
 end
