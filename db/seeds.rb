@@ -2,9 +2,9 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 Service::OFFERINGS.each do |service|
-  return unless Service.where(type: service).blank?
+  return unless Service.where(service_type: service).blank?
 
-  Service.new.tap {|s| s.update_attributes!(type: service) }
+  Service.new.tap {|s| s.update_attributes!(service_type: service) }
 end
 
 

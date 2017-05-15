@@ -8,7 +8,7 @@
           = person_form.label :first_name
         .col-sm-8
           .col-sm-8
-            = person_form.text_field :first_name, class: "form-control col-sm-8"
+            = person_form.text_field :first_name, class: "form-control col-sm-8", placeholder: 'dunno'
       .form-group.row
         .col-sm-4
           = person_form.label :last_name
@@ -21,43 +21,50 @@
       .col-sm-8
         .col-sm-8
           = user_form.text_field :email, class: "form-control col-sm-8"
-    / .form-group.row
-    /   .col-sm-4
-    /     = user_form.label :phone_number
-    /   .col-sm-8
-    /     .col-sm-8
-    /       = user_form.text_field :phone_number, class: "form-control col-sm-8"
+    = user_form.fields_for :phone_number do |phone_form|
+      .form-group.row
+        .col-sm-4
+          = phone_form.label :number
+        .col-sm-8
+          .col-sm-8
+            = phone_form.text_field :number, class: "form-control col-sm-8"
+      .form-group.row
+        .col-sm-4
+          = phone_form.label :phone_number_type
+        .col-sm-8
+          .col-sm-8
+            = phone_form.text_field :phone_number_type, class: "form-control col-sm-8"
     = user_form.fields_for :address do |addr_form|
       .form-group.row
         .col-sm-4
           = addr_form.label :street_address_1
-          %br/
         .col-sm-8
-          = addr_form.text_field :street_address_1, class: "form-control col-sm-8"
+          .col-sm-8
+            = addr_form.text_field :street_address_1, class: "form-control col-sm-8"
       .form-group.row
         .col-sm-4
           = addr_form.label :street_address_2
-          %br/
         .col-sm-8
-          = addr_form.text_field :street_address_2, class: "form-control col-sm-8"
+          .col-sm-8
+            = addr_form.text_field :street_address_2, class: "form-control col-sm-8"
       .form-group.row
         .col-sm-4
           = addr_form.label :city
-          %br/
         .col-sm-8
-          = addr_form.text_field :city, class: "form-control col-sm-8"
+          .col-sm-8
+            = addr_form.text_field :city, class: "form-control col-sm-8"
       .form-group.row
         .col-sm-4
           = addr_form.label :state
-          %br/
         .col-sm-8
-          = addr_form.text_field :state, class: "form-control col-sm-8"
+          .col-sm-8
+            = addr_form.text_field :state, class: "form-control col-sm-8"
       .form-group.row
         .col-sm-4
           = addr_form.label :zip_code
-          %br/
         .col-sm-8
-          = addr_form.text_field :zip_code, class: "form-control col-sm-8"
+          .col-sm-8
+            = addr_form.text_field :zip_code, class: "form-control col-sm-8"
     .row
       .col-sm-4
         .btn

@@ -10,11 +10,12 @@ class Person < ActiveRecord::Base
   end
 
   def phone_number
-    contacts.try(:current_phone_number)
+    # TODO don't just go off last here
+    phone_numbers.last
   end
 
   def email
-    contacts.current_email
+    user.try(:email) || emails.last
   end
 
   def address

@@ -16,7 +16,10 @@ class BoardPresenter
 
   def board_data
     board_members.map do |bm|
-      OrganizerPresenter.new(bm.user).call
+      {
+        name: user.full_name,
+        position: user.position,
+      }
     end
   end
 

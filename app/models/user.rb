@@ -11,10 +11,6 @@ class User < ActiveRecord::Base
   has_many :addresses, as: :addressable
   has_many :reimbursement_requests
 
-  def address
-    person.try(:address)
-  end
-
   ROLES = [
     BOARD_MEMBER = 'board_member'
   ]
@@ -31,8 +27,16 @@ class User < ActiveRecord::Base
     user
   end
 
+  def full_name
+    person.try(:full_name)
+  end
+
+  def address
+    person.try(:address)
+  end
+
   def board_member?
-    has_mac_gmail?
+    role == BOARD_MEMBER
   end
 
   def has_mac_gmail?

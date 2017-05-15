@@ -3,7 +3,6 @@ class OrganizerPresenter < UserPresenter
 
   def initialize(user)
     @user = user
-    @organizer = user.organizer
     @address = user.try(:address)
   end
 
@@ -17,7 +16,7 @@ class OrganizerPresenter < UserPresenter
 
   def organizer_data
     {
-      board_member: organizer.board_member,
+      role: user.board_member,
       position: organizer.position,
     }
   end

@@ -1,3 +1,5 @@
+ require 'users/create_or_update'
+
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_user, :load_user_data, only: [:show, :edit, :update, :destroy]
@@ -9,48 +11,40 @@ class UsersController < ApplicationController
   end
 
   def update
-    current_user.update_attributes(user_params)
-
-    person = update_or_create_person
-    update_or_create_address_for(person)
-
+    Users::CreateOrUpdate.call(@user, all_params)
     redirect_to dashboards_board_path
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:email)
+  def all_params
+    expected = %i(user person address phone_number)
+    expected.each_with_object({}) do |expected, allowed|
+      allowed.tap do |allow|
+        permitted_keys = method("#{expected}_attrs").call
+        allowed[expected] = if expected == :user
+          params.require(expected).permit(permitted_keys)
+        else
+          params.require(:user).require(expected).permit(permitted_keys)
+        end
+      end
+    end.deep_symbolize_keys
   end
 
-  def address_params
-    params.require(:user).require(:address).permit(:street_address_1, :street_address_2, :city, :state, :zip_code)
+  def user_attrs
+    %i(email)
   end
 
-  def person_params
-    params.require(:user).require(:person).permit(:first_name, :last_name)
+  def phone_number_attrs
+    %i(number phone_number_type)
   end
 
-  def params_present_for?(assoc)
-    params["user"]["#{assoc}"].values.any? {|v| !v.blank? }
+  def address_attrs
+    %i(street_address_1 street_address_2 city state zip_code)
   end
 
-  def update_or_create_address_for(person)
-    return unless person && params_present_for?('address')
-    if (address = current_user.address)
-      address.update_attributes(address_params)
-    else
-      person.addresses.create(address_params)
-    end
-  end
-
-  def update_or_create_person
-    return current_user.person unless params_present_for?('person')
-    if (person = current_user.person)
-      person.tap { |p| p.update_attributes!(person_params) }
-    else
-      Person.create(person_params.merge(user: current_user))
-    end
+  def person_attrs
+    %i(first_name last_name)
   end
 
   def load_user
