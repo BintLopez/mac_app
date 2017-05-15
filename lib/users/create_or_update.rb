@@ -2,16 +2,16 @@ module Users
   class CreateOrUpdate
     attr_reader :user, :user_data, :person_data, :phone_number_data, :address_data
 
-    def self.call(user, data_blob)
-      new(user, data_blob).call
+    def self.call(user, data)
+      new(user, data).call
     end
 
-    def initialize(user, data_blob)
+    def initialize(user, data)
       @user = user
-      @user_data = data_blob[:user]
-      @person_data = data_blob[:person]
-      @phone_number_data = data_blob[:phone_number]
-      @address_data = data_blob[:address]
+      @user_data = data[:user]
+      @person_data = data[:person]
+      @phone_number_data = data[:phone_number]
+      @address_data = data[:address]
     end
 
     def call
@@ -24,15 +24,13 @@ module Users
 
     private
 
-    attr_writer :person
-
     def update_user!
       return unless user_data
       user.update_attributes!(user_data)
     end
 
     def create_or_update_person!
-      return unless person_data
+      return unless person_data.present?
       if person
         person.update_attributes!(person_data)
       else
@@ -41,8 +39,8 @@ module Users
     end
 
     def create_or_update_phone_number!
-      return unless phone_number_data
-      return unless person
+      return unless phone_number_data.present?
+      return unless person && person.phone_number
       phone_number = PhoneNumber.format_for_db(phone_number_data[:number])
       existing_number = person.phone_numbers.find_by(number: phone_number)
       if existing_number
@@ -53,7 +51,7 @@ module Users
     end
 
     def create_or_update_address!
-      return unless address_data
+      return unless address_data.present?
       return unless person
       existing_address = person.addresses.find_by(address_data)
       if existing_address

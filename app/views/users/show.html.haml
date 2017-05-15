@@ -22,7 +22,7 @@
       %tr
         %td
           Phone Number
-        %td= @user_data[:phone_number]
+        %td= @user_data[:phone_number].try(:number)
       %tr
         %td
           Email

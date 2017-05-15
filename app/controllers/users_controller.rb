@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    Users::CreateOrUpdate.call(@user, all_params)
+    Users::CreateOrUpdate.call(@user, params_sans_empty_strings)
     redirect_to dashboards_board_path
   end
 
@@ -28,7 +28,16 @@ class UsersController < ApplicationController
           params.require(:user).require(expected).permit(permitted_keys)
         end
       end
-    end.deep_symbolize_keys
+    end.compact.deep_symbolize_keys
+  end
+
+  def params_sans_empty_strings
+    all_params.deep_dup.inject({}) do |new_hash, (k,v)|
+      if v.present?
+        new_hash[k] = v.is_a?(Hash) ? v.delete_if{|k,v| v.empty?} : v
+      end
+      new_hash
+    end
   end
 
   def user_attrs
