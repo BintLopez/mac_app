@@ -83,7 +83,7 @@ describe Users::CreateOrUpdate do
     let!(:person) { Person.create!(person_data.merge(user: user)) }
 
     context 'when the person does not have a phone number or address saved' do
-      it 'creates address and phone number for the person' do
+      xit 'creates address and phone number for the person' do
         expect{ subject }.to change{ person.addresses.count }.by(1).and change{ person.phone_numbers.count }.by(1)
       end
     end
