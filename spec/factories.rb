@@ -5,12 +5,6 @@ FactoryGirl.define do
     status "MyString"
     notes "MyText"
   end
-  factory :contact do
-    do_not_contact false
-  end
-  factory :service do
-    type ""
-  end
   factory :services_rendered do
     service_id 1
     support_request_id 1
@@ -63,11 +57,6 @@ FactoryGirl.define do
     volunteer_id 1
     guest_capacity 1
     inactive false
-  end
-  factory :contactable do
-    contact_id 1
-    contactable_id 1
-    contactable_type "MyString"
   end
   factory :addressable do
     address_id 1
