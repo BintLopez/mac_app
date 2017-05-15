@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 20161101061227) do
   add_index "people", ["user_id"], name: "index_people_on_user_id", using: :btree
 
   create_table "pets", force: :cascade do |t|
-    t.string   "type"
+    t.string   "pet_type"
     t.string   "size"
     t.string   "behavior"
     t.integer  "host_id"
@@ -136,9 +136,9 @@ ActiveRecord::Schema.define(version: 20161101061227) do
     t.string   "callable_type"
     t.string   "number"
     t.boolean  "inactive"
-    t.string   "type"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "phone_number_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   add_index "phone_numbers", ["callable_type", "callable_id"], name: "index_phone_numbers_on_callable_type_and_callable_id", using: :btree
@@ -156,9 +156,9 @@ ActiveRecord::Schema.define(version: 20161101061227) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.string   "type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "service_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "services_rendereds", force: :cascade do |t|
